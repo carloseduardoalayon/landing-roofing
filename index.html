@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alom Builders | Hurricane-Proof Roofing</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; letter-spacing: -0.02em; }
+        .heading-xl { font-weight: 900; line-height: 0.95; }
+        h1, h2, h3, h4, h5, h6, [data-i18n="hero-sub"], [data-i18n="testimonial"], [data-i18n="cta-final"] { font-family: 'Oswald', sans-serif; }
+        h1, h2, h3, h4, h5 { text-transform: uppercase; }
+        /* Transición suave para el cambio de idioma */
+        [data-i18n] { transition: opacity 0.2s ease; }
+
+        /* From Uiverse.io by juyi_2230 */ 
+        .meeting-card {
+        background-color: #e9eeea;
+        border-radius: 2rem;
+        padding: 1.5rem;
+        width: 100%;
+        max-width: 380px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        }
+
+        .title {
+        font-size: 1.875rem;
+        font-weight: bold;
+        line-height: 1.2;
+        }
+
+        .date-selector {
+        background-color: #e9eeea;
+        border-radius: 9999px;
+        padding: 0.7rem 1.2rem;
+        cursor: pointer;
+        border: 1px solid #d0d0ce;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        display: flex;
+        align-items: center;
+        transition: background-color 0.2s ease;
+        }
+
+        .date-selector:hover {
+        background-color: #dededd;
+        }
+
+        .date-selector span {
+        font-size: 1rem;
+        font-weight: 500;
+        margin-right: 0.5rem;
+        }
+
+        .calls-info {
+        display: flex;
+        align-items: center;
+        margin-bottom: 2rem;
+        }
+
+        .calls-info span {
+        margin-left: 0.5rem;
+        font-size: 0.875rem;
+        }
+
+        .date-nav-and-indicators {
+        position: relative;
+        }
+
+        .date-nav-container {
+        background-color: white;
+        border-radius: 16px;
+        padding: 12px 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 20px;
+        }
+
+        .day-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        width: 100%;
+        }
+
+        .day-number,
+        .day-name {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        background-color: transparent;
+        transition: background-color 0.2s ease;
+        }
+
+        .day-number {
+        font-size: 1.2rem;
+        font-weight: 600;
+        height: 28px;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        padding-top: 5px;
+        }
+
+        .day-name {
+        font-size: 0.7rem;
+        height: 20px;
+        color: #666;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        }
+
+        .day-item:hover .day-number,
+        .day-item:hover .day-name {
+        background-color: #f8f8f8;
+        }
+
+        .day-active .day-number,
+        .day-active .day-name {
+        background-color: #f0ff7a;
+        }
+
+        .indicator-container {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        position: relative;
+        padding: 0 28px;
+        box-sizing: border-box;
+        }
+
+        .indicator-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: #d0d0ce;
+        position: relative;
+        z-index: 2;
+        }
+
+        .indicator-active {
+        background-color: #000;
+        }
+
+        .indicator-line {
+        position: absolute;
+        top: 50%;
+        left: 32px;
+        right: 32px;
+        height: 1px;
+        border-top: 1.5px dashed #d0d0ce;
+        z-index: 1;
+        }
+
+        @media screen and (max-width: 480px) {
+        .meeting-card {
+            max-width: 100%;
+            padding: 1rem;
+            border-radius: 1.5rem;
+        }
+
+        .title {
+            font-size: 1.5rem;
+        }
+
+        .date-selector {
+            padding: 0.5rem 0.8rem;
+        }
+
+        .date-selector span {
+            font-size: 0.9rem;
+        }
+
+        .day-number,
+        .day-name {
+            width: 36px;
+        }
+
+        .day-number {
+            font-size: 1rem;
+        }
+
+        .day-name {
+            font-size: 0.65rem;
+        }
+
+        .indicator-container {
+            padding: 0 24px;
+        }
+
+        .indicator-line {
+            left: 28px;
+            right: 28px;
+        }
+
+        .calls-info span {
+            font-size: 0.75rem;
+        }
+        }
+
+        @media screen and (max-width: 350px) {
+        .meeting-card {
+            padding: 0.8rem;
+        }
+
+        .header {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .date-selector {
+            margin-top: 0.5rem;
+        }
+
+        .day-number,
+        .day-name {
+            width: 30px;
+        }
+
+        .day-number {
+            font-size: 0.9rem;
+        }
+
+        .day-name {
+            font-size: 0.6rem;
+        }
+
+        .indicator-container {
+            padding: 0 20px;
+        }
+
+        .indicator-line {
+            left: 24px;
+            right: 24px;
+        }
+        }
+    </style>
+</head>
+<body class="bg-white text-slate-900">
+
+    <!-- NAVBAR -->
+    <nav class="border-b border-slate-100 py-4 px-6 sticky top-0 bg-white/80 backdrop-blur-md z-50">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-2 font-black text-xl text-[#3053a4]">
+                <div class="w-6 h-6 bg-[#aec844] rounded flex items-center justify-center text-white"><i data-lucide="shield" class="w-4 h-4"></i></div>
+                ALOM BUILDERS
+            </div>
+            
+            <div class="flex items-center gap-6">
+                <!-- IDIOMA TOGGLE -->
+                <div class="flex bg-slate-100 p-1 rounded-full text-[10px] font-bold">
+                    <button onclick="changeLang('en')" id="btn-en" class="px-3 py-1 rounded-full bg-white shadow-sm text-[#3053a4]">EN</button>
+                    <button onclick="changeLang('es')" id="btn-es" class="px-3 py-1 rounded-full text-slate-400">ES</button>
+                </div>
+                <div class="hidden md:block text-[10px] font-bold text-slate-400 uppercase tracking-widest text-right">
+                    License CGC 1526677 <br> South Florida
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO + FORM -->
+    <main class="max-w-6xl mx-auto px-6 pt-8 pb-12">
+        <div class="grid lg:grid-cols-5 gap-12 items-start">
+            
+            <div class="lg:col-span-3 space-y-6">
+                <div class="inline-flex items-center gap-2 bg-[#aec844]/10 text-[#3053a4] px-3 py-1 rounded-full text-xs font-bold">
+                    <span class="relative flex h-2 w-2">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#aec844] opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-2 w-2 bg-[#aec844]"></span>
+                    </span>
+                    <span class="uppercase font-bold" data-i18n="hero-badge">Office hours: Humans. After hours: AI.</span>
+                </div>
+                
+                <h1 class="heading-xl text-6xl md:text-7xl text-[#3053a4]" data-i18n="hero-title">
+                    Practical protection <br> <span class="text-[#aec844]">that keeps you</span> <br> insured.
+                </h1>
+                
+                <p class="text-xl text-slate-500 max-w-lg leading-tight" data-i18n="hero-sub">
+                    (And your family deserves to sleep soundly under it).<br><br> In 20 years protecting South Florida homes, we've learned something: a good roof isn't an expense. <span class="text-slate-900 font-bold underline decoration-[#aec844]"><br><br>a good roof isn't an expense.<br>It's peace of mind.</span>
+                </p>
+
+                <div class="flex flex-wrap gap-6 py-4 border-y border-slate-50">
+                    <div class="flex flex-col">
+                        <span class="text-2xl font-black text-[#3053a4]">6,000+</span>
+                        <span class="text-[10px] uppercase font-bold text-slate-400" data-i18n="stat-1">Installations</span>
+                    </div>
+                    <div class="flex flex-col border-l border-slate-200 pl-6">
+                        <span class="text-2xl font-black text-[#3053a4]">GAF Elite</span>
+                        <span class="text-[10px] uppercase font-bold text-slate-400" data-i18n="stat-2">Only 3% in USA</span>
+                    </div>
+                    <div class="flex flex-col border-l border-slate-200 pl-6">
+                        <span class="text-2xl font-black text-[#3053a4]">4.7 ★</span>
+                        <span class="text-[10px] uppercase font-bold text-slate-400" data-i18n="stat-3">Google Reviews</span>
+                    </div>
+                </div>
+
+                <!-- MOVED BENTO GRID CONTENT (STACKED) -->
+                <div class="pt-8 flex flex-col gap-4">
+                    <div class="bg-slate-800 text-white p-8 rounded-[2rem] flex flex-col justify-between">
+                        <div>
+                            <h4 class="text-3xl font-black leading-none mb-6 uppercase" data-i18n="problem-title">Sounds <br> familiar?</h4>
+                            <ul class="text-sm space-y-4 text-slate-300">
+                                <li class="flex gap-3"><i data-lucide="check" class="text-red-400 w-4 h-4 shrink-0"></i> <span data-i18n="p-1">"It's too expensive now, I'll do it next year"</span></li>
+                                <li class="flex gap-3"><i data-lucide="check" class="text-red-400 w-4 h-4 shrink-0"></i> <span data-i18n="p-2">"My insurance says I have 60 days or I lose coverage"</span></li>
+                                <li class="flex gap-3"><i data-lucide="check" class="text-red-400 w-4 h-4 shrink-0"></i> <span data-i18n="p-3">"The HOA sent me a violation letter"</span></li>
+                            </ul>
+                        </div>
+                        <div class="mt-8 pt-6 border-t border-slate-700">
+                            <p class="font-bold text-[#aec844] mb-2" data-i18n="uncomfortable-truth-title">The uncomfortable truth:</p>
+                            <p class="text-slate-300 text-sm" data-i18n="uncomfortable-truth-desc1">Every month you wait, the cost goes up $500-$1,200.</p>
+                            <p class="text-slate-400 text-xs italic mt-1" data-i18n="uncomfortable-truth-desc2">We've seen it 2,000 times.</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-[#3053a4] text-white p-6 rounded-[2rem]">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="bg-white/10 p-2 rounded-lg text-[#aec844]"><i data-lucide="zap"></i></div>
+                                <h5 class="font-black text-lg" data-i18n="sol-1-t">15-min Financing</h5>
+                            </div>
+                            <p class="text-sm text-blue-100" data-i18n="sol-1-d">We don't wait for your bank to respond in 3 weeks.<br> Financing approved while we're having coffee.</p>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-100 p-6 rounded-[2rem]">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="bg-[#aec844]/20 p-2 rounded-lg text-[#aec844]"><i data-lucide="shield-check"></i></div>
+                                <h5 class="font-black text-lg text-[#3053a4]" data-i18n="sol-2-t">Zero Damage in 20 Years</h5>
+                            </div>
+                            <p class="text-sm text-slate-500 font-medium" data-i18n="sol-2-d">6,000 roofs installed.
+Irma, Michael, Ian... not one emergency call. Not one leak.</p>
+                        </div>
+                <!-- MOBILE FORM CONTAINER -->
+                <div class="lg:hidden bg-slate-50 p-6 rounded-[2rem] border border-slate-200 shadow-xl">
+                    <div class="text-center mb-6">
+                        <h2 class="text-xl font-black text-[#3053a4]" data-i18n="form-title">The Smart Roof Assessment</h2>
+                        <p class="text-sm text-slate-500" data-i18n="form-sub">Busy or away? <b>Our AI agent has you covered 24/7.</b></p>
+                    </div>
+                    <button popovertarget="form-popover" class="w-full py-4 bg-[#aec844] hover:bg-[#9ab338] text-white rounded-xl font-black text-lg shadow-lg transition-all flex items-center justify-center gap-2 group">
+                        <span data-i18n="cta-form-btn">START ASSESSMENT</span>
+                        <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+                    <p class="text-[10px] text-center mt-4 text-slate-400 font-medium italic">
+                        <i data-lucide="lock" class="inline w-3 h-3"></i> <span data-i18n="form-footer">Protected by $2M Insurance coverage.</span>
+                    </p>
+                </div>
+                        <div class="md:col-span-2 bg-[#aec844]/10 border border-[#aec844]/20 p-6 rounded-[2rem] flex flex-col md:flex-row justify-between items-center gap-4">
+                            <p class="text-[#3053a4] font-black text-xl italic text-center md:text-left" data-i18n="testimonial">
+                                "After 3 tropical storms, not a single drop of water."
+                            </p>
+                            <div class="flex items-center gap-3 shrink-0">
+                                <div class="text-right">
+                                    <p class="font-bold text-xs">Verified Client</p>
+                                    <p class="text-[10px] text-slate-500">Coral Springs</p>
+                                </div>
+                                <div class="w-10 h-10 bg-[#3053a4] rounded-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FORM CONTAINER -->
+            <div class="hidden lg:block lg:col-span-2 bg-slate-50 p-6 rounded-[2rem] border border-slate-200 shadow-xl">
+                <div class="text-center mb-6">
+                    <h2 class="text-xl font-black text-[#3053a4]" data-i18n="form-title">The Smart Roof Assessment</h2>
+                    <p class="text-sm text-slate-500" data-i18n="form-sub">Busy or away? <b>Our AI agent has you covered 24/7.</b></p>
+                </div>
+                
+                <!-- BUTTON TRIGGER -->
+                <button popovertarget="form-popover" class="w-full py-4 bg-[#aec844] hover:bg-[#9ab338] text-white rounded-xl font-black text-lg shadow-lg transition-all flex items-center justify-center gap-2 group">
+                    <span data-i18n="cta-form-btn">START ASSESSMENT</span>
+                    <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                </button>
+
+                <p class="text-[10px] text-center mt-4 text-slate-400 font-medium italic">
+                    <i data-lucide="lock" class="inline w-3 h-3"></i> <span data-i18n="form-footer">Protected by $2M Insurance coverage.</span>
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <!-- PRICING SECTION -->
+    <section class="max-w-4xl mx-auto px-6 pb-20 text-center">
+        <h2 class="text-4xl font-black text-[#3053a4] mb-8 uppercase italic leading-none" data-i18n="offer-title">What you get today:</h2>
+        
+        <div class="bg-white border-4 border-[#3053a4] rounded-[3rem] overflow-hidden shadow-2xl">
+            <div class="bg-[#3053a4] text-white py-3 px-6 text-xs font-bold tracking-widest uppercase" data-i18n="offer-badge">
+                A professional evaluation reserved for qualified homeowners.
+            </div>
+            <div class="p-8 grid md:grid-cols-2 gap-8 text-left items-center">
+                <ul class="space-y-4 font-bold text-sm">
+                    <li class="flex items-center gap-3"><i data-lucide="check" class="text-[#aec844]"></i> <span data-i18n="o-1">We climb the roof (no drone-only)</span></li>
+                    <li class="flex items-center gap-3"><i data-lucide="check" class="text-[#aec844]"></i> <span data-i18n="o-2">Clear explanation in English/Spanish</span></li>
+                    <li class="flex items-center gap-3 text-[#3053a4] bg-[#aec844]/20 px-2 py-1 rounded inline-flex underline" data-i18n="o-3">2 neighbors join? Everyone saves $250</li>
+                </ul>
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100">
+                    <p class="text-xs font-bold text-slate-400 mb-2 uppercase" data-i18n="price-ref">Typical Investment:</p>
+                    <p class="text-4xl font-black text-[#3053a4] mb-2">~$13,600</p>
+                    <p class="text-[10px] leading-tight text-slate-500" data-i18n="price-desc">For 2,000 sqft home. Includes materials, permits, cleaning, and 1 year maintenance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-white py-12 px-6 text-center md:text-left">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            <div>
+                <h4 class="text-2xl font-black text-[#aec844]">ALOM BUILDERS</h4>
+                <p class="text-slate-400 text-xs mt-2" data-i18n="footer-desc">Family owned. 20 years protecting Florida.</p>
+            </div>
+            <div class="space-y-2 md:text-right">
+                <p class="text-xl font-black text-[#aec844]" data-i18n="cta-final">GET YOUR ASSESSMENT NOW</p>
+                <p class="text-[10px] text-slate-500 uppercase">Miami-Dade • Broward • Palm Beach</p>
+                <p class="text-[9px] text-slate-600">Alom Builders LLC | License CGC 1526677 | $2M Insurance</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- POPOVER FORM (SHARED) -->
+    <div id="form-popover" popover class="bg-white p-0 rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto backdrop:bg-slate-900/60 backdrop:backdrop-blur-sm">
+            <div class="sticky top-0 bg-white/90 backdrop-blur z-10 p-4 flex justify-between items-center border-b border-slate-100">
+            <span class="font-bold text-[#3053a4]" data-i18n="form-title">The Smart Roof Assessment</span>
+            <button popovertarget="form-popover" popovertargetaction="hide" class="p-2 bg-slate-100 rounded-full hover:bg-slate-200 transition-colors">
+                <i data-lucide="x" class="w-4 h-4 text-slate-500"></i>
+            </button>
+        </div>
+        <div class="p-2">
+            <div class="bg-white rounded-xl overflow-hidden">
+                <iframe
+                src="https://api.leadconnectorhq.com/widget/form/5aAFeW8yhIfYOwgdFbYF"
+                style="width:100%;height:100%;border:none;border-radius:3px"
+                id="inline-5aAFeW8yhIfYOwgdFbYF" 
+                data-layout="{'id':'INLINE'}"
+                data-trigger-type="alwaysShow"
+                data-trigger-value=""
+                data-activation-type="alwaysActivated"
+                data-activation-value=""
+                data-deactivation-type="neverDeactivate"
+                data-deactivation-value=""
+                data-form-name="Roofing form"
+                data-height="1353"
+                data-layout-iframe-id="inline-5aAFeW8yhIfYOwgdFbYF"
+                data-form-id="5aAFeW8yhIfYOwgdFbYF"
+                title="Roofing form"
+                    >
+                </iframe>
+                <script src="https://link.msgsndr.com/js/form_embed.js"></script>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // TRADUCCIONES
+        const translations = {
+            en: {
+                "hero-badge": "WE RESPOND IN 1 HOUR",
+                "hero-title": "Practical protection <br> <span class='text-[#aec844]'>that keeps you</span> <br> insured.",
+                "hero-sub": "(And your family deserves to sleep tight). 20 years protecting South Florida homes. <span class='text-slate-900 font-bold underline decoration-[#aec844]'>A good roof is peace of mind.</span>",
+                "stat-1": "Installations", "stat-2": "Only 3% in USA", "stat-3": "Google Reviews",
+                "form-title": "The Smart Roof Assessment", "form-sub": "Busy or away? <b>Our AI agent has you covered 24/7.</b>",
+                "form-footer": "Protected by $2M Insurance coverage.",
+                "cta-form-btn": "START ASSESSMENT",
+                "problem-title": "Sounds <br> familiar?",
+                "p-1": "\"It's too expensive now, I'll do it next year\"", 
+                "p-2": "\"My insurance says I have 60 days or I lose coverage\"", 
+                "p-3": "\"The HOA sent me a violation letter\"",
+                "uncomfortable-truth-title": "The uncomfortable truth:",
+                "uncomfortable-truth-desc1": "Every month you wait, the cost goes up $500-$1,200.",
+                "uncomfortable-truth-desc2": "We've seen it 2,000 times.",
+                "sol-1-t": "15-min Financing", "sol-1-d": "We know $13,600 isn't just lying on the couch. Fast approval so you don't wait.",
+                "sol-2-t": "100% Hurricane Proof", "sol-2-d": "Zero emergency calls after Irma or Ian. Our roofs do not fail.",
+                "testimonial": '"After 3 tropical storms, not a single drop of water."',
+                "offer-title": "What you get today:", "offer-badge": "A professional evaluation reserved for qualified homeowners.",
+                "o-1": "We climb the roof (no drone-only)", "o-2": "Clear explanation in English/Spanish", "o-3": "2 neighbors join? Everyone saves $250",
+                "price-ref": "Typical Investment:", "price-desc": "For 2,000 sqft home. Includes materials, permits, cleaning, and 1 year maintenance.",
+                "footer-desc": "Family owned. 20 years protecting Florida.",
+                "cta-final": "GET YOUR ASSESSMENT NOW"
+            },
+            es: {
+                "hero-badge": "RESPONDEMOS EN 1 HORA",
+                "hero-title": "Protección práctica <br> <span class='text-[#aec844]'>que lo mantiene</span> <br> asegurado.",
+                "hero-sub": "(Y su familia merece dormir tranquila). 20 años protegiendo hogares en el sur de Florida. <span class='text-slate-900 font-bold underline decoration-[#aec844]'>Un buen techo es paz mental.</span>",
+                "stat-1": "Instalaciones", "stat-2": "Solo 3% en USA", "stat-3": "Reseñas Google",
+                "form-title": "Evaluación Inteligente", "form-sub": "¿Ocupado o fuera? <b>Nuestro agente de IA le atiende 24/7.</b>",
+                "form-footer": "Protegido por seguro de $2M.",
+                "cta-form-btn": "INICIAR EVALUACIÓN",
+                "problem-title": "¿Le suena <br> familiar?",
+                "p-1": "\"Ahora es muy caro, lo haré el próximo año\"",
+                "p-2": "\"Mi seguro dice que tengo 60 días o pierdo la cobertura\"",
+                "p-3": "\"La asociación (HOA) me envió una carta de infracción\"",
+                "uncomfortable-truth-title": "La incómoda verdad:",
+                "uncomfortable-truth-desc1": "Cada mes que esperas, el costo aumenta entre $500 y $1,200.",
+                "uncomfortable-truth-desc2": "Lo hemos visto 2,000 veces.",
+                "sol-1-t": "Financiación en 15 min", "sol-1-d": "Sabemos que $13,600 no están tirados en el sofá. Aprobamos rápido.",
+                "sol-2-t": "100% Antihuracanes", "sol-2-d": "Cero llamadas tras Irma o Ian. Nuestros techos no fallan.",
+                "testimonial": '"Después de 3 tormentas tropicales, ni una gota de agua."',
+                "offer-title": "Lo que recibe hoy:", "offer-badge": "Evaluación profesional reservada para propietarios calificados.",
+                "o-1": "Subimos al techo (nada de drones)", "o-2": "Explicación clara EN ESPAÑOL", "o-3": "Si 2 vecinos se unen, todos ahorran $250",
+                "price-ref": "Inversión Típica:", "price-desc": "Casa de 2,000 pies². Incluye materiales, permisos, limpieza y 1 año de mantenimiento.",
+                "footer-desc": "Empresa familiar. 20 años protegiendo Florida.",
+                "cta-final": "AGENDAR EVALUACIÓN AHORA"
+            }
+        };
+
+        function changeLang(lang) {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                el.innerHTML = translations[lang][key];
+            });
+
+            // Estilo de botones
+            if(lang === 'es') {
+                document.getElementById('btn-es').classList.add('bg-white', 'shadow-sm', 'text-[#3053a4]');
+                document.getElementById('btn-es').classList.remove('text-slate-400');
+                document.getElementById('btn-en').classList.remove('bg-white', 'shadow-sm', 'text-[#3053a4]');
+                document.getElementById('btn-en').classList.add('text-slate-400');
+            } else {
+                document.getElementById('btn-en').classList.add('bg-white', 'shadow-sm', 'text-[#3053a4]');
+                document.getElementById('btn-en').classList.remove('text-slate-400');
+                document.getElementById('btn-es').classList.remove('bg-white', 'shadow-sm', 'text-[#3053a4]');
+                document.getElementById('btn-es').classList.add('text-slate-400');
+            }
+        }
+
+        lucide.createIcons();
+    </script>
+</body>
+</html>
