@@ -7,254 +7,51 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         body { font-family: 'Inter', sans-serif; letter-spacing: -0.02em; }
-        .heading-xl { font-weight: 900; line-height: 0.95; }
-        h1, h2, h3, h4, h5, h6, [data-i18n="hero-sub"], [data-i18n="testimonial"], [data-i18n="cta-final"] { font-family: 'Oswald', sans-serif; }
-        h1, h2, h3, h4, h5 { text-transform: uppercase; }
-        /* Transición suave para el cambio de idioma */
+        h1, h2, h3, h4, h5, h6, .oswald-font { font-family: 'Oswald', sans-serif; }
+        
+        /* Animación suave para cambio de idioma */
         [data-i18n] { transition: opacity 0.2s ease; }
 
-        /* From Uiverse.io by juyi_2230 */ 
-        .meeting-card {
-        background-color: #e9eeea;
-        border-radius: 2rem;
-        padding: 1.5rem;
-        width: 100%;
-        max-width: 380px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        /* EL TRUCO DEL FONDO: Imagen + Gradiente de fusión */
+        .hero-background {
+            background-image: url('https://github.com/carloseduardoalayon/landing-roofing/blob/main/HERO.png?raw=true');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
 
-        .header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 1.5rem;
+        /* En Desktop: La imagen va a la derecha y se desvanece hacia la izquierda */
+        @media (min-width: 1024px) {
+            .hero-background {
+                background-position: right center;
+                /* Esto crea el efecto de desvanecimiento suave hacia el blanco */
+                -webkit-mask-image: linear-gradient(to right, transparent 0%, black 20%, black 100%);
+                mask-image: linear-gradient(to right, transparent 0%, black 20%, black 100%);
+            }
         }
 
-        .title {
-        font-size: 1.875rem;
-        font-weight: bold;
-        line-height: 1.2;
-        }
-
-        .date-selector {
-        background-color: #e9eeea;
-        border-radius: 9999px;
-        padding: 0.7rem 1.2rem;
-        cursor: pointer;
-        border: 1px solid #d0d0ce;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-        display: flex;
-        align-items: center;
-        transition: background-color 0.2s ease;
-        }
-
-        .date-selector:hover {
-        background-color: #dededd;
-        }
-
-        .date-selector span {
-        font-size: 1rem;
-        font-weight: 500;
-        margin-right: 0.5rem;
-        }
-
-        .calls-info {
-        display: flex;
-        align-items: center;
-        margin-bottom: 2rem;
-        }
-
-        .calls-info span {
-        margin-left: 0.5rem;
-        font-size: 0.875rem;
-        }
-
-        .date-nav-and-indicators {
-        position: relative;
-        }
-
-        .date-nav-container {
-        background-color: white;
-        border-radius: 16px;
-        padding: 12px 8px;
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        margin-bottom: 20px;
-        }
-
-        .day-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        position: relative;
-        width: 100%;
-        }
-
-        .day-number,
-        .day-name {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 40px;
-        background-color: transparent;
-        transition: background-color 0.2s ease;
-        }
-
-        .day-number {
-        font-size: 1.2rem;
-        font-weight: 600;
-        height: 28px;
-        border-top-left-radius: 20px;
-        border-top-right-radius: 20px;
-        padding-top: 5px;
-        }
-
-        .day-name {
-        font-size: 0.7rem;
-        height: 20px;
-        color: #666;
-        border-bottom-left-radius: 20px;
-        border-bottom-right-radius: 20px;
-        }
-
-        .day-item:hover .day-number,
-        .day-item:hover .day-name {
-        background-color: #f8f8f8;
-        }
-
-        .day-active .day-number,
-        .day-active .day-name {
-        background-color: #f0ff7a;
-        }
-
-        .indicator-container {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        position: relative;
-        padding: 0 28px;
-        box-sizing: border-box;
-        }
-
-        .indicator-dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background-color: #d0d0ce;
-        position: relative;
-        z-index: 2;
-        }
-
-        .indicator-active {
-        background-color: #000;
-        }
-
-        .indicator-line {
-        position: absolute;
-        top: 50%;
-        left: 32px;
-        right: 32px;
-        height: 1px;
-        border-top: 1.5px dashed #d0d0ce;
-        z-index: 1;
-        }
-
-        @media screen and (max-width: 480px) {
-        .meeting-card {
-            max-width: 100%;
-            padding: 1rem;
-            border-radius: 1.5rem;
-        }
-
-        .title {
-            font-size: 1.5rem;
-        }
-
-        .date-selector {
-            padding: 0.5rem 0.8rem;
-        }
-
-        .date-selector span {
-            font-size: 0.9rem;
-        }
-
-        .day-number,
-        .day-name {
-            width: 36px;
-        }
-
-        .day-number {
-            font-size: 1rem;
-        }
-
-        .day-name {
-            font-size: 0.65rem;
-        }
-
-        .indicator-container {
-            padding: 0 24px;
-        }
-
-        .indicator-line {
-            left: 28px;
-            right: 28px;
-        }
-
-        .calls-info span {
-            font-size: 0.75rem;
-        }
-        }
-
-        @media screen and (max-width: 350px) {
-        .meeting-card {
-            padding: 0.8rem;
-        }
-
-        .header {
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        .date-selector {
-            margin-top: 0.5rem;
-        }
-
-        .day-number,
-        .day-name {
-            width: 30px;
-        }
-
-        .day-number {
-            font-size: 0.9rem;
-        }
-
-        .day-name {
-            font-size: 0.6rem;
-        }
-
-        .indicator-container {
-            padding: 0 20px;
-        }
-
-        .indicator-line {
-            left: 24px;
-            right: 24px;
-        }
+        /* En Mobile: La imagen va de fondo suave */
+        @media (max-width: 1023px) {
+            .hero-background {
+                background-position: top center;
+                opacity: 0.3; /* Más suave en móvil para que se lea el texto */
+                -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+                mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+            }
         }
     </style>
 </head>
-<body class="bg-white text-slate-900">
+<body class="bg-white text-slate-900 overflow-x-hidden">
 
     <!-- NAVBAR -->
     <nav class="border-b border-slate-100 py-4 px-6 sticky top-0 bg-white/80 backdrop-blur-md z-50">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
             <div class="flex items-center gap-2 font-black text-xl text-[#3053a4]">
-                <div class="w-6 h-6 bg-[#aec844] rounded flex items-center justify-center text-white"><i data-lucide="shield" class="w-4 h-4"></i></div>
+                <img src="https://alombuilders.us/wp-content/uploads/2026/01/cropped-Alom-favicon.png" alt="Alom Builders" class="w-8 h-8">
                 ALOM BUILDERS
             </div>
             
@@ -271,177 +68,339 @@
         </div>
     </nav>
 
-    <!-- HERO + FORM -->
-    <main class="max-w-6xl mx-auto px-6 pt-8 pb-12">
-        <div class="grid lg:grid-cols-5 gap-12 items-start">
-            
-            <div class="lg:col-span-3 space-y-6">
-                <div class="inline-flex items-center gap-2 bg-[#aec844]/10 text-[#3053a4] px-3 py-1 rounded-full text-xs font-bold">
-                    <span class="relative flex h-2 w-2">
-                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#aec844] opacity-75"></span>
-                      <span class="relative inline-flex rounded-full h-2 w-2 bg-[#aec844]"></span>
-                    </span>
-                    <span class="uppercase font-bold" data-i18n="hero-badge">Office hours: Humans. After hours: AI.</span>
-                </div>
+    <!-- HERO SECTION (REDISEÑADO) -->
+    <!-- Contenedor relativo para posicionar el fondo -->
+    <section class="relative w-full min-h-screen lg:min-h-[850px] flex items-center pt-16 lg:pt-0 overflow-hidden">
+        
+        <!-- 1. CAPA DE FONDO (IMAGEN) -->
+        <!-- En desktop ocupa el 65% derecho. En móvil ocupa todo el fondo pero difuminado -->
+        <div class="absolute right-0 top-0 w-full lg:w-[70%] h-[50vh] lg:h-full z-0">
+            <div class="hero-background w-full h-full"></div>
+        </div>
+
+        <!-- 2. CAPA DE GRADIENTE BLANCO (Solo para asegurar legibilidad extra) -->
+        <div class="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white lg:bg-gradient-to-r lg:from-white lg:via-white/60 lg:to-transparent z-0 pointer-events-none"></div>
+
+        <!-- 3. CONTENIDO PRINCIPAL -->
+        <div class="max-w-[1400px] mx-auto px-6 relative z-10 w-full h-full">
+            <div class="grid lg:grid-cols-12 gap-8 items-center h-full">
                 
-                <h1 class="heading-xl text-6xl md:text-7xl text-[#3053a4]" data-i18n="hero-title">
-                    Practical protection <br> <span class="text-[#aec844]">that keeps you</span> <br> insured.
-                </h1>
-                
-                <p class="text-xl text-slate-500 max-w-lg leading-tight" data-i18n="hero-sub">
-                    (And your family deserves to sleep soundly under it).<br><br> In 20 years protecting South Florida homes, we've learned something: a good roof isn't an expense. <span class="text-slate-900 font-bold underline decoration-[#aec844]"><br><br>a good roof isn't an expense.<br>It's peace of mind.</span>
-                </p>
-
-                <div class="flex flex-wrap gap-6 py-4 border-y border-slate-50">
-                    <div class="flex flex-col">
-                        <span class="text-2xl font-black text-[#3053a4]">6,000+</span>
-                        <span class="text-[10px] uppercase font-bold text-slate-400" data-i18n="stat-1">Installations</span>
-                    </div>
-                    <div class="flex flex-col border-l border-slate-200 pl-6">
-                        <span class="text-2xl font-black text-[#3053a4]">GAF Elite</span>
-                        <span class="text-[10px] uppercase font-bold text-slate-400" data-i18n="stat-2">Only 3% in USA</span>
-                    </div>
-                    <div class="flex flex-col border-l border-slate-200 pl-6">
-                        <span class="text-2xl font-black text-[#3053a4]">4.7 ★</span>
-                        <span class="text-[10px] uppercase font-bold text-slate-400" data-i18n="stat-3">Google Reviews</span>
-                    </div>
-                </div>
-
-                <!-- MOVED BENTO GRID CONTENT (STACKED) -->
-                <div class="pt-8 flex flex-col gap-4">
-                    <div class="bg-slate-800 text-white p-8 rounded-[2rem] flex flex-col justify-between">
-                        <div>
-                            <h4 class="text-3xl font-black leading-none mb-6 uppercase" data-i18n="problem-title">Sounds <br> familiar?</h4>
-                            <ul class="text-sm space-y-4 text-slate-300">
-                                <li class="flex gap-3"><i data-lucide="check" class="text-red-400 w-4 h-4 shrink-0"></i> <span data-i18n="p-1">"It's too expensive now, I'll do it next year"</span></li>
-                                <li class="flex gap-3"><i data-lucide="check" class="text-red-400 w-4 h-4 shrink-0"></i> <span data-i18n="p-2">"My insurance says I have 60 days or I lose coverage"</span></li>
-                                <li class="flex gap-3"><i data-lucide="check" class="text-red-400 w-4 h-4 shrink-0"></i> <span data-i18n="p-3">"The HOA sent me a violation letter"</span></li>
-                            </ul>
+                <!-- COLUMNA IZQUIERDA: TEXTO (Ocupa 7 columnas en desktop) -->
+                <div class="lg:col-span-7 flex flex-col justify-center space-y-4 lg:space-y-8 pt-1 lg:pt-0">
+                    
+                    <!-- Badge -->
+                    <div>
+                        <div class="inline-flex items-center gap-2 bg-[#aec844]/10 border border-[#aec844]/20 text-[#3053a4] px-3 py-1.5 rounded-full text-[10px] lg:text-xs font-bold shadow-sm backdrop-blur-sm">
+                            <span class="relative flex h-2 w-2">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#aec844] opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-[#aec844]"></span>
+                            </span>
+                            <span class="uppercase tracking-wide" data-i18n="hero-badge">Office hours: Humans. After hours: AI.</span>
                         </div>
-                        <div class="mt-8 pt-6 border-t border-slate-700">
-                            <p class="font-bold text-[#aec844] mb-2" data-i18n="uncomfortable-truth-title">The uncomfortable truth:</p>
-                            <p class="text-slate-300 text-sm" data-i18n="uncomfortable-truth-desc1">Every month you wait, the cost goes up $500-$1,200.</p>
-                            <p class="text-slate-400 text-xs italic mt-1" data-i18n="uncomfortable-truth-desc2">We've seen it 2,000 times.</p>
+                    </div>
+                    
+                    <!-- Titulo GIGANTE -->
+                    <h1 class="text-[#3053a4] text-6xl md:text-7xl lg:text-[6rem] xl:text-78rem] leading-[0.9] font-black uppercase tracking-tighter" data-i18n="hero-title">
+                        Practical <br> 
+                        Protection <br> 
+                        <span class="text-[#aec844]">That Keeps You</span> <br> 
+                        Insured.
+                    </h1>
+                    
+                    <!-- Subtitulo -->
+                    <div class="text-lg lg:text-2xl text-slate-600 max-w-xl leading-relaxed font-medium">
+                        <p class="mb-4 oswald-font text-slate-500 text-xl lg:text-2xl font-bold uppercase" data-i18n="hero-sub-1">Evita sorpresas costosas: Obtén análisis satelital + dossier para seguros GRATIS (valor $1,900)</p>
+                        
+                        <div class="space-y-4 text-base lg:text-lg">
+                            <p data-i18n="hero-sub-2">La mayoría de los propietarios no se demoran porque no les importe. <br class="hidden lg:block">Se demoran porque no tienen información técnica clara.</p>
+                            <p data-i18n="hero-sub-3">Costs don’t usually rise because of the roof itself — <br class="hidden lg:block">they rise because timing removes options.</p>
+                            <p class="text-slate-900 font-bold border-l-4 border-[#aec844] pl-4" data-i18n="hero-sub-4">After 20 years and 6,000+ projects, we’ve learned this: <br>Preparation protects both your budget and your leverage.</p>
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="bg-[#3053a4] text-white p-6 rounded-[2rem]">
-                            <div class="flex items-center gap-4 mb-4">
-                                <div class="bg-white/10 p-2 rounded-lg text-[#aec844]"><i data-lucide="zap"></i></div>
-                                <h5 class="font-black text-lg" data-i18n="sol-1-t">15-min Financing</h5>
-                            </div>
-                            <p class="text-sm text-blue-100" data-i18n="sol-1-d">We don't wait for your bank to respond in 3 weeks.<br> Financing approved while we're having coffee.</p>
+                    <!-- Stats Row -->
+                    <div class="flex flex-wrap gap-6 lg:gap-10 pt-4 pb-8 lg:pb-0">
+                        <div class="flex flex-col">
+                            <span class="text-3xl lg:text-4xl font-black text-[#3053a4] tracking-tighter">6,000+</span>
+                            <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider" data-i18n="stat-1">Installations</span>
                         </div>
-                        <div class="bg-slate-50 border border-slate-100 p-6 rounded-[2rem]">
-                            <div class="flex items-center gap-4 mb-4">
-                                <div class="bg-[#aec844]/20 p-2 rounded-lg text-[#aec844]"><i data-lucide="shield-check"></i></div>
-                                <h5 class="font-black text-lg text-[#3053a4]" data-i18n="sol-2-t">Zero Damage in 20 Years</h5>
-                            </div>
-                            <p class="text-sm text-slate-500 font-medium" data-i18n="sol-2-d">6,000 roofs installed.
-Irma, Michael, Ian... not one emergency call. Not one leak.</p>
+                        <div class="w-px h-10 bg-slate-200"></div>
+                        <div class="flex flex-col">
+                            <span class="text-3xl lg:text-4xl font-black text-[#3053a4] tracking-tighter">GAF Elite</span>
+                            <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider" data-i18n="stat-2">Only 3% in USA</span>
                         </div>
-                <!-- MOBILE FORM CONTAINER -->
-                <div class="lg:hidden bg-slate-50 p-6 rounded-[2rem] border border-slate-200 shadow-xl">
-                    <div class="text-center mb-6">
-                        <h2 class="text-xl font-black text-[#3053a4]" data-i18n="form-title">The Smart Roof Assessment</h2>
-                        <p class="text-sm text-slate-500" data-i18n="form-sub">Busy or away? <b>Our AI agent has you covered 24/7.</b></p>
-                    </div>
-                    <button popovertarget="form-popover" class="w-full py-4 bg-[#aec844] hover:bg-[#9ab338] text-white rounded-xl font-black text-lg shadow-lg transition-all flex items-center justify-center gap-2 group">
-                        <span data-i18n="cta-form-btn">START ASSESSMENT</span>
-                        <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
-                    </button>
-                    <p class="text-[10px] text-center mt-4 text-slate-400 font-medium italic">
-                        <i data-lucide="lock" class="inline w-3 h-3"></i> <span data-i18n="form-footer">Protected by $2M Insurance coverage.</span>
-                    </p>
-                </div>
-                        <div class="md:col-span-2 bg-[#aec844]/10 border border-[#aec844]/20 p-6 rounded-[2rem] flex flex-col md:flex-row justify-between items-center gap-4">
-                            <p class="text-[#3053a4] font-black text-xl italic text-center md:text-left" data-i18n="testimonial">
-                                "After 3 tropical storms, not a single drop of water."
-                            </p>
-                            <div class="flex items-center gap-3 shrink-0">
-                                <div class="text-right">
-                                    <p class="font-bold text-xs">Verified Client</p>
-                                    <p class="text-[10px] text-slate-500">Coral Springs</p>
-                                </div>
-                                <div class="w-10 h-10 bg-[#3053a4] rounded-full"></div>
-                            </div>
+                        <div class="w-px h-10 bg-slate-200"></div>
+                        <div class="flex flex-col">
+                            <span class="text-3xl lg:text-4xl font-black text-[#3053a4] tracking-tighter">4.7 <span class="text-[#aec844]">★</span></span>
+                            <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider" data-i18n="stat-3">Google Reviews</span>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- FORM CONTAINER -->
-            <div class="hidden lg:block lg:col-span-2 bg-slate-50 p-6 rounded-[2rem] border border-slate-200 shadow-xl">
-                <div class="text-center mb-6">
-                    <h2 class="text-xl font-black text-[#3053a4]" data-i18n="form-title">The Smart Roof Assessment</h2>
-                    <p class="text-sm text-slate-500" data-i18n="form-sub">Busy or away? <b>Our AI agent has you covered 24/7.</b></p>
+                <!-- COLUMNA DERECHA: TARJETA FLOTANTE (Ocupa 5 columnas en desktop) -->
+                <!-- En desktop se posiciona abajo a la derecha. En mobile se apila al final -->
+                <div class="lg:col-span-5 flex lg:justify-end lg:items-end lg:h-[800px] lg:pb-20">
+                    
+                    <!-- CTA CARD -->
+                    <div class="w-full max-w-md bg-white rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-slate-100 p-8 relative z-20 mx-auto lg:mx-0">
+                        <div class="text-center mb-6">
+                            <h2 class="text-2xl font-black text-[#3053a4] uppercase oswald-font leading-none mb-2" data-i18n="form-title">The Smart Roof Assessment</h2>
+                            <p class="text-sm text-slate-500 leading-snug" data-i18n="form-sub">Busy or away? <br> <span class="text-slate-900 font-bold">Our AI agent has you covered 24/7.</span></p>
+                        </div>
+                        
+                        <button popovertarget="form-popover" class="w-full py-5 bg-[#aec844] hover:bg-[#9ab338] text-white rounded-xl font-black text-xl shadow-lg shadow-[#aec844]/30 transition-all flex items-center justify-center gap-2 group transform active:scale-95">
+                            <span data-i18n="cta-form-btn">START ASSESSMENT</span>
+                            <i data-lucide="arrow-right" class="w-6 h-6 group-hover:translate-x-1 transition-transform"></i>
+                        </button>
+
+                        <div class="mt-4 flex justify-center items-center gap-1.5 text-[10px] text-slate-400 font-medium italic">
+                            <i data-lucide="lock" class="w-3 h-3"></i> 
+                            <span data-i18n="form-footer">Protected by $2M Insurance coverage.</span>
+                        </div>
+                    </div>
+
                 </div>
-                
-                <!-- BUTTON TRIGGER -->
-                <button popovertarget="form-popover" class="w-full py-4 bg-[#aec844] hover:bg-[#9ab338] text-white rounded-xl font-black text-lg shadow-lg transition-all flex items-center justify-center gap-2 group">
-                    <span data-i18n="cta-form-btn">START ASSESSMENT</span>
-                    <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
-                </button>
-
-                <p class="text-[10px] text-center mt-4 text-slate-400 font-medium italic">
-                    <i data-lucide="lock" class="inline w-3 h-3"></i> <span data-i18n="form-footer">Protected by $2M Insurance coverage.</span>
-                </p>
             </div>
         </div>
-    </main>
+    </section>
 
-    <!-- PRICING SECTION -->
-    <section class="max-w-4xl mx-auto px-6 pb-20 text-center">
-        <h2 class="text-4xl font-black text-[#3053a4] mb-8 uppercase italic leading-none" data-i18n="offer-title">What you get today:</h2>
-        
-        <div class="bg-white border-4 border-[#3053a4] rounded-[3rem] overflow-hidden shadow-2xl">
-            <div class="bg-[#3053a4] text-white py-3 px-6 text-xs font-bold tracking-widest uppercase" data-i18n="offer-badge">
-                A professional evaluation reserved for qualified homeowners.
+    <!-- TESTIMONIALS SECTION -->
+    <section class="bg-slate-50/70 py-20 lg:py-24">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <h2 class="text-3xl lg:text-4xl font-black text-[#3053a4] uppercase oswald-font mb-4" data-i18n="testimonials-title">Tranquilidad, Entregada.</h2>
+            <p class="max-w-2xl mx-auto text-slate-600 mb-12" data-i18n="testimonials-subtitle">Construimos relaciones, no solo techos. Esto es lo que dicen nuestros clientes después de experimentar la diferencia de Alom Builders.</p>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
+                <!-- Testimonial 1 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 flex flex-col">
+                    <div class="flex items-center gap-1 mb-2">
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                    </div>
+                    <p class="text-slate-700 mb-4 flex-grow text-sm" data-i18n="t1-text">"Alum builders hizo un trabajo realmente genial en nuestro nuevo techo de metal. Quedó exactamente como esperábamos y no ha habido fugas... La calidad del trabajo es excepcional, y no dudaré en usar esta compañía de nuevo."</p>
+                    <div class="flex items-center justify-between mt-auto pt-4 border-t border-slate-100">
+                        <p class="font-bold text-sm text-slate-800">Patricia Killian</p>
+                        <a href="https://maps.app.goo.gl/935pmDwifzS4eWqu8" target="_blank" class="text-xs text-blue-500 hover:underline">Verificado</a>
+                    </div>
+                </div>
+                <!-- Testimonial 2 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 flex flex-col">
+                    <div class="flex items-center gap-1 mb-2">
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                    </div>
+                    <p class="text-slate-700 mb-4 flex-grow text-sm" data-i18n="t2-text">"Hicieron un trabajo increíble en mi casa. Remodelaron completamente mi baño, instalaron todas mis ventanas de impacto y se encargaron de mi sistema de techo de metal de principio a fin. La calidad, atención al detalle y profesionalismo fueron de primer nivel."</p>
+                    <div class="flex items-center justify-between mt-auto pt-4 border-t border-slate-100">
+                        <p class="font-bold text-sm text-slate-800">Ronald M.</p>
+                        <a href="https://maps.app.goo.gl/BvXSEgVFrJDFPi2n9" target="_blank" class="text-xs text-blue-500 hover:underline">Verificado</a>
+                    </div>
+                </div>
+                <!-- Testimonial 3 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 flex flex-col">
+                    <div class="flex items-center gap-1 mb-2">
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                    </div>
+                    <p class="text-slate-700 mb-4 flex-grow text-sm" data-i18n="t3-text">"Mi primo, que hizo una renovación con Alom Builders, me los recomendó. Reemplacé el techo viejo de mi casa con ellos. Ahora los recomiendo a cualquiera que quiera una buena renovación. Gran trabajo. Excelente servicio al cliente..."</p>
+                    <div class="flex items-center justify-between mt-auto pt-4 border-t border-slate-100">
+                        <p class="font-bold text-sm text-slate-800">Julio Villa</p>
+                        <a href="https://maps.app.goo.gl/5vmRAJRK3jjTy7LK6" target="_blank" class="text-xs text-blue-500 hover:underline">Verificado</a>
+                    </div>
+                </div>
             </div>
-            <div class="p-8 grid md:grid-cols-2 gap-8 text-left items-center">
-                <ul class="space-y-4 font-bold text-sm">
-                    <li class="flex items-center gap-3"><i data-lucide="check" class="text-[#aec844]"></i> <span data-i18n="o-1">We climb the roof (no drone-only)</span></li>
-                    <li class="flex items-center gap-3"><i data-lucide="check" class="text-[#aec844]"></i> <span data-i18n="o-2">Clear explanation in English/Spanish</span></li>
-                    <li class="flex items-center gap-3 text-[#3053a4] bg-[#aec844]/20 px-2 py-1 rounded inline-flex underline" data-i18n="o-3">2 neighbors join? Everyone saves $250</li>
-                </ul>
-                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100">
-                    <p class="text-xs font-bold text-slate-400 mb-2 uppercase" data-i18n="price-ref">Typical Investment:</p>
-                    <p class="text-4xl font-black text-[#3053a4] mb-2">~$13,600</p>
-                    <p class="text-[10px] leading-tight text-slate-500" data-i18n="price-desc">For 2,000 sqft home. Includes materials, permits, cleaning, and 1 year maintenance.</p>
+        </div>
+    </section>
+
+    <!-- SMART PROCESS SECTION -->
+    <section class="py-20 lg:py-24">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <h2 class="text-3xl lg:text-4xl font-black text-[#3053a4] uppercase oswald-font mb-12" data-i18n="process-title">Nuestro Proceso Inteligente en 3 Pasos</h2>
+            <div class="relative grid md:grid-cols-3 gap-8 md:gap-4">
+                <!-- Dotted line for desktop -->
+                <div class="hidden md:block absolute top-10 left-0 w-full h-px">
+                    <div class="w-full border-t-2 border-dashed border-slate-300"></div>
+                </div>
+                
+                <!-- Step 1 -->
+                <div class="relative flex flex-col items-center text-center">
+                    <div class="w-20 h-20 bg-[#aec844]/10 border-4 border-white rounded-full flex items-center justify-center text-[#3053a4] mb-4 shadow-lg z-10 bg-white">
+                        <i data-lucide="satellite-dish" class="w-10 h-10"></i>
+                    </div>
+                    <h3 class="font-black text-lg text-[#3053a4] uppercase oswald-font" data-i18n="step1-title">Step 1: Remote AI + Satellite Assessment</h3>
+                    <p class="text-slate-600 text-sm" data-i18n="step1-desc">No visit yet. No disruption.</p>
+                </div>
+                <!-- Step 2 -->
+                <div class="relative flex flex-col items-center text-center">
+                    <div class="w-20 h-20 bg-[#aec844]/10 border-4 border-white rounded-full flex items-center justify-center text-[#3053a4] mb-4 shadow-lg z-10 bg-white">
+                        <i data-lucide="clipboard-check" class="w-10 h-10"></i>
+                    </div>
+                    <h3 class="font-black text-lg text-[#3053a4] uppercase oswald-font" data-i18n="step2-title">Step 2: Insurance-Ready Technical Dossier</h3>
+                    <p class="text-slate-600 text-sm" data-i18n="step2-desc">Clear documentation + personalized system recommendation.</p>
+                </div>
+                <!-- Step 3 -->
+                <div class="relative flex flex-col items-center text-center">
+                    <div class="w-20 h-20 bg-[#aec844]/10 border-4 border-white rounded-full flex items-center justify-center text-[#3053a4] mb-4 shadow-lg z-10 bg-white">
+                        <i data-lucide="hard-hat" class="w-10 h-10"></i>
+                    </div>
+                    <h3 class="font-black text-lg text-[#3053a4] uppercase oswald-font" data-i18n="step3-title">Step 3: Traditional Installation by Our Certified Team</h3>
+                    <p class="text-slate-600 text-sm" data-i18n="step3-desc">GAF Elite installers. Permits, compliance, and execution handled end-to-end.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING / VALUE SECTION (Mantener para consistencia) -->
+    <section class="max-w-3xl mx-auto px-6 py-20 relative z-10">
+        <div class="bg-white border-4 border-[#3053a4] rounded-[2.5rem] overflow-hidden shadow-2xl">
+            <div class="bg-[#3053a4] text-white py-4 px-6 text-center">
+                <h2 class="text-2xl lg:text-3xl font-black uppercase italic tracking-wide" data-i18n="offer-title">WHAT’S INCLUDED (WHEN YOU QUALIFY):</h2>
+            </div>
+            
+            <div class="p-6 lg:p-10 space-y-8">
+                <!-- List Items -->
+                <div class="space-y-6">
+                    <!-- Item 1 -->
+                    <div class="flex gap-4">
+                        <div class="shrink-0 mt-1 text-[#aec844]"><i data-lucide="satellite" class="w-6 h-6"></i></div>
+                        <div>
+                            <h3 class="font-black text-[#3053a4] text-lg uppercase" data-i18n="val-1-title">Remote Satellite Roof Analysis ($900 value)</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed" data-i18n="val-1-desc">Non-invasive review using the same aerial data insurers rely on. No disruption.</p>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="flex gap-4">
+                        <div class="shrink-0 mt-1 text-[#aec844]"><i data-lucide="file-check" class="w-6 h-6"></i></div>
+                        <div>
+                            <h3 class="font-black text-[#3053a4] text-lg uppercase" data-i18n="val-2-title">Insurance-Ready Technical Dossier ($600 value)</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed" data-i18n="val-2-desc">Documented snapshot of condition, risks, and compliance to avoid insurer/HOA surprises.</p>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="flex gap-4">
+                        <div class="shrink-0 mt-1 text-[#aec844]"><i data-lucide="shield-check" class="w-6 h-6"></i></div>
+                        <div>
+                            <h3 class="font-black text-[#3053a4] text-lg uppercase" data-i18n="val-3-title">Expert System Recommendation ($400 value)</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed" data-i18n="val-3-desc">Plain-language material options and warranties aligned with your budget.</p>
+                        </div>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="flex gap-4">
+                        <div class="shrink-0 mt-1 text-[#aec844]"><i data-lucide="users" class="w-6 h-6"></i></div>
+                        <div>
+                            <h3 class="font-black text-[#3053a4] text-lg uppercase" data-i18n="val-4-title">Ventaja de Buen Vecino</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed" data-i18n="val-4-desc">If 2 neighbors qualify, each gets a $250 project credit.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Total Value -->
+                <div class="mt-8 pt-8 border-t-2 border-slate-100 text-center">
+                    <p class="text-slate-400 font-bold text-sm uppercase tracking-widest mb-1" data-i18n="val-total-label">TOTAL PROFESSIONAL VALUE: <span class="line-through decoration-red-500 decoration-2">$1,900</span></p>
+                    <p class="text-4xl lg:text-5xl font-black text-[#3053a4]" data-i18n="val-price">QUALIFIED HOMEOWNERS: $0</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN SERVICES SECTION -->
+    <section class="bg-slate-50/70 py-20 lg:py-24">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <h2 class="text-3xl lg:text-4xl font-black text-[#3053a4] uppercase oswald-font mb-4" data-i18n="services-title">Servicios Principales en South Florida</h2>
+            <p class="max-w-2xl mx-auto text-slate-600 mb-12" data-i18n="services-subtitle">Diseñados para huracanes y lluvias intensas en Miami-Dade, Broward y Palm Beach.</p>
+            
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Service Card 1 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 text-center hover:shadow-lg hover:-translate-y-1 transition-all">
+                    <div class="inline-block p-3 bg-[#3053a4]/10 rounded-lg text-[#3053a4] mb-4">
+                        <i data-lucide="layers-3" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="font-black text-lg text-slate-800 uppercase oswald-font mb-2" data-i18n="service1-title">Techos de Shingle</h3>
+                    <button popovertarget="form-popover" class="text-sm font-bold text-[#3053a4] hover:underline" data-i18n="service-cta">Ver Detalles</button>
+                </div>
+                <!-- Service Card 2 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 text-center hover:shadow-lg hover:-translate-y-1 transition-all">
+                    <div class="inline-block p-3 bg-[#3053a4]/10 rounded-lg text-[#3053a4] mb-4">
+                        <i data-lucide="sheet" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="font-black text-lg text-slate-800 uppercase oswald-font mb-2" data-i18n="service2-title">Techos de Metal</h3>
+                    <button popovertarget="form-popover" class="text-sm font-bold text-[#3053a4] hover:underline" data-i18n="service-cta">Ver Detalles</button>
+                </div>
+                <!-- Service Card 3 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 text-center hover:shadow-lg hover:-translate-y-1 transition-all">
+                    <div class="inline-block p-3 bg-[#3053a4]/10 rounded-lg text-[#3053a4] mb-4">
+                        <i data-lucide="layout-grid" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="font-black text-lg text-slate-800 uppercase oswald-font mb-2" data-i18n="service3-title">Techos de Teja</h3>
+                    <button popovertarget="form-popover" class="text-sm font-bold text-[#3053a4] hover:underline" data-i18n="service-cta">Ver Detalles</button>
+                </div>
+                <!-- Service Card 4 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 text-center hover:shadow-lg hover:-translate-y-1 transition-all">
+                    <div class="inline-block p-3 bg-[#3053a4]/10 rounded-lg text-[#3053a4] mb-4">
+                        <i data-lucide="square" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="font-black text-lg text-slate-800 uppercase oswald-font mb-2" data-i18n="service4-title">Techos Planos</h3>
+                    <button popovertarget="form-popover" class="text-sm font-bold text-[#3053a4] hover:underline" data-i18n="service-cta">Ver Detalles</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY US SECTION -->
+    <section class="py-20 lg:py-24">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="text-center lg:text-left">
+                    <h2 class="text-3xl lg:text-4xl font-black text-[#3053a4] uppercase oswald-font mb-4" data-i18n="why-title">¿Por qué Alom Builders?</h2>
+                    <p class="text-slate-600 text-lg" data-i18n="why-subtitle">Combinamos 20 años de experiencia práctica con tecnología inteligente para ofrecerle un proceso de techado mejor, más rápido y más transparente.</p>
+                </div>
+                <div class="space-y-4">
+                    <div class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-[#aec844] shrink-0 mt-1"></i><p class="text-slate-700" data-i18n="why1"><strong>Análisis IA + Satélite:</strong> Ahorre tiempo y evite molestias con nuestra evaluación remota.</p></div>
+                    <div class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-[#aec844] shrink-0 mt-1"></i><p class="text-slate-700" data-i18n="why2"><strong>$0 para Propietarios Calificados:</strong> Obtenga una evaluación profesional valorada en $1,900 sin costo.</p></div>
+                    <div class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-[#aec844] shrink-0 mt-1"></i><p class="text-slate-700" data-i18n="why3"><strong>Proteja su Presupuesto y Opciones:</strong> Nuestro proceso de preparación protege su presupuesto y opciones de seguro.</p></div>
+                    <div class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-[#aec844] shrink-0 mt-1"></i><p class="text-slate-700" data-i18n="why4"><strong>Equipo Humano Certificado GAF:</strong> Benefíciese de 20 años de experiencia y certificación de élite.</p></div>
+                    <div class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-[#aec844] shrink-0 mt-1"></i><p class="text-slate-700" data-i18n="why5"><strong>Cobertura de Seguro de $2M:</strong> Su propiedad y su tranquilidad están totalmente protegidas.</p></div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- FOOTER -->
-    <footer class="bg-slate-900 text-white py-12 px-6 text-center md:text-left">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+    <footer class="bg-slate-900 text-white py-12 px-6 text-center md:text-left relative z-10">
+        <div class="max-w-[1400px] mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
             <div>
-                <h4 class="text-2xl font-black text-[#aec844]">ALOM BUILDERS</h4>
+                <h4 class="text-2xl font-black text-[#aec844] oswald-font">ALOM BUILDERS</h4>
                 <p class="text-slate-400 text-xs mt-2" data-i18n="footer-desc">Family owned. 20 years protecting Florida.</p>
             </div>
             <div class="space-y-2 md:text-right">
-                <p class="text-xl font-black text-[#aec844]" data-i18n="cta-final">GET YOUR ASSESSMENT NOW</p>
+                <p class="text-xl font-black text-[#aec844] oswald-font" data-i18n="cta-final">GET YOUR ASSESSMENT NOW</p>
                 <p class="text-[10px] text-slate-500 uppercase">Miami-Dade • Broward • Palm Beach</p>
                 <p class="text-[9px] text-slate-600">Alom Builders LLC | License CGC 1526677 | $2M Insurance</p>
             </div>
         </div>
     </footer>
 
-    <!-- POPOVER FORM (SHARED) -->
+    <!-- POPOVER FORM -->
     <div id="form-popover" popover class="bg-white p-0 rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto backdrop:bg-slate-900/60 backdrop:backdrop-blur-sm">
-            <div class="sticky top-0 bg-white/90 backdrop-blur z-10 p-4 flex justify-between items-center border-b border-slate-100">
+        <div class="sticky top-0 bg-white/90 backdrop-blur z-10 p-4 flex justify-between items-center border-b border-slate-100">
             <span class="font-bold text-[#3053a4]" data-i18n="form-title">The Smart Roof Assessment</span>
             <button popovertarget="form-popover" popovertargetaction="hide" class="p-2 bg-slate-100 rounded-full hover:bg-slate-200 transition-colors">
                 <i data-lucide="x" class="w-4 h-4 text-slate-500"></i>
             </button>
         </div>
         <div class="p-2">
-            <div class="bg-white rounded-xl overflow-hidden">
+            <div class="bg-white rounded-xl overflow-hidden min-h-[500px]">
                 <iframe
                 src="https://api.leadconnectorhq.com/widget/form/5aAFeW8yhIfYOwgdFbYF"
-                style="width:100%;height:100%;border:none;border-radius:3px"
+                style="width:100%;height:100%;border:none;border-radius:3px;min-height:500px;"
                 id="inline-5aAFeW8yhIfYOwgdFbYF" 
                 data-layout="{'id':'INLINE'}"
                 data-trigger-type="alwaysShow"
@@ -466,50 +425,84 @@ Irma, Michael, Ian... not one emergency call. Not one leak.</p>
         // TRADUCCIONES
         const translations = {
             en: {
-                "hero-badge": "WE RESPOND IN 1 HOUR",
-                "hero-title": "Practical protection <br> <span class='text-[#aec844]'>that keeps you</span> <br> insured.",
-                "hero-sub": "(And your family deserves to sleep tight). 20 years protecting South Florida homes. <span class='text-slate-900 font-bold underline decoration-[#aec844]'>A good roof is peace of mind.</span>",
+                "hero-badge": "Office hours: Humans. After hours: AI.",
+                "hero-title": "Practical <br> Protection <br> <span class='text-[#aec844]'>That Keeps You</span> <br> Insured.",
+                "hero-sub-1": "Avoid costly surprises. Get a satellite analysis + insurance-ready dossier — FREE ($1,900 value).",
+                "hero-sub-2": "Most homeowners don’t delay because they don’t care. <br class=\"hidden lg:block\">They delay because they don’t have clear technical information.",
+                "hero-sub-3": "Costs don’t usually rise because of the roof itself — <br class=\"hidden lg:block\">they rise because timing removes options.",
+                "hero-sub-4": "After 20 years and 6,000+ projects, we’ve learned this: <br>Preparation protects both your budget and your leverage.",
                 "stat-1": "Installations", "stat-2": "Only 3% in USA", "stat-3": "Google Reviews",
-                "form-title": "The Smart Roof Assessment", "form-sub": "Busy or away? <b>Our AI agent has you covered 24/7.</b>",
+                "form-title": "The Smart Roof Assessment", 
+                "form-sub": "Busy or away? <br> <span class='text-slate-900 font-bold'>Our AI agent has you covered 24/7.</span>",
                 "form-footer": "Protected by $2M Insurance coverage.",
                 "cta-form-btn": "START ASSESSMENT",
-                "problem-title": "Sounds <br> familiar?",
-                "p-1": "\"It's too expensive now, I'll do it next year\"", 
-                "p-2": "\"My insurance says I have 60 days or I lose coverage\"", 
-                "p-3": "\"The HOA sent me a violation letter\"",
-                "uncomfortable-truth-title": "The uncomfortable truth:",
-                "uncomfortable-truth-desc1": "Every month you wait, the cost goes up $500-$1,200.",
-                "uncomfortable-truth-desc2": "We've seen it 2,000 times.",
-                "sol-1-t": "15-min Financing", "sol-1-d": "We know $13,600 isn't just lying on the couch. Fast approval so you don't wait.",
-                "sol-2-t": "100% Hurricane Proof", "sol-2-d": "Zero emergency calls after Irma or Ian. Our roofs do not fail.",
-                "testimonial": '"After 3 tropical storms, not a single drop of water."',
-                "offer-title": "What you get today:", "offer-badge": "A professional evaluation reserved for qualified homeowners.",
-                "o-1": "We climb the roof (no drone-only)", "o-2": "Clear explanation in English/Spanish", "o-3": "2 neighbors join? Everyone saves $250",
-                "price-ref": "Typical Investment:", "price-desc": "For 2,000 sqft home. Includes materials, permits, cleaning, and 1 year maintenance.",
+                "testimonials-title": "Peace of Mind, Delivered.",
+                "testimonials-subtitle": "We build relationships, not just roofs. Here's what our clients say after experiencing the Alom Builders difference.",
+                "t1-text": "\"Alum builders did a really great job on our new metal roof. It came out exactly as we expected and there has been no leaks... The quality of work is exceptional, and I will not hesitate to use this company again.\"",
+                "t2-text": "\"Alom Builders did an amazing job on my home. They remodeled my bathroom, installed impact windows, and handled my metal roof system from start to finish. The quality of work, attention to detail, and professionalism were top tier. Communication was clear, timelines were respected, and results exceeded expectations. I 100% recommend Alom Builders to anyone looking for reliable, high-quality construction work.\"",
+                "t3-text": "\"My cousin who did a Home Renovation with Alom Builders, recommended them to me. I replaced my home old roof with Alom Builders. Now I recommend Alom Builders to any one who wants a good Home Renovation. Great Job. Excellent Customer Service...\"",
+                "process-title": "Our Smart Process in 3 Steps",
+                "step1-title": "Step 1: Remote AI + Satellite Assessment", "step1-desc": "No visit yet. No disruption.",
+                "step2-title": "Step 2: Insurance-Ready Technical Dossier", "step2-desc": "Clear documentation + personalized system recommendation.",
+                "step3-title": "Step 3: Traditional Installation by Our Certified Team", "step3-desc": "GAF Elite installers. Permits, compliance, and execution handled end-to-end.",
+                "offer-title": "WHAT’S INCLUDED (WHEN YOU QUALIFY):",
+                "val-1-title": "Remote Satellite Roof Analysis ($900 value)", "val-1-desc": "Non-invasive review using the same aerial data insurers rely on. No disruption.",
+                "val-2-title": "Insurance-Ready Technical Dossier ($600 value)", "val-2-desc": "Documented snapshot of condition, risks, and compliance to avoid insurer/HOA surprises.",
+                "val-3-title": "Expert System Recommendation ($400 value)", "val-3-desc": "Plain-language material options and warranties aligned with your budget.",
+                "val-4-title": "Good Neighbor Advantage", "val-4-desc": "If 2 neighbors qualify, each gets a $250 project credit.",
+                "val-total-label": "TOTAL PROFESSIONAL VALUE: <span class='line-through decoration-red-500 decoration-2'>$1,900</span>", "val-price": "QUALIFIED HOMEOWNERS: $0",
+                "services-title": "Core Roofing Services in South Florida",
+                "services-subtitle": "Engineered for hurricanes and heavy rains in Miami-Dade, Broward, and Palm Beach.",
+                "service1-title": "Shingle Roofs", "service2-title": "Metal Roofs", "service3-title": "Tile Roofs", "service4-title": "Flat Roofs",
+                "service-cta": "Get Details",
+                "why-title": "Why Alom Builders?",
+                "why-subtitle": "We blend 20 years of hands-on experience with smart technology to give you a better, faster, and more transparent roofing process.",
+                "why1": "<strong>AI + satellite analysis</strong> that saves time and avoids disruption",
+                "why2": "<strong>$0 cost for qualified homeowners</strong> (real $1,900 professional value)",
+                "why3": "<strong>Preparation</strong> that protects both budget and insurance options",
+                "why4": "<strong>Human team certified GAF Elite</strong> with 20 years of experience",
+                "why5": "<strong>$2M insurance coverage</strong> for total peace of mind",
                 "footer-desc": "Family owned. 20 years protecting Florida.",
                 "cta-final": "GET YOUR ASSESSMENT NOW"
             },
             es: {
-                "hero-badge": "RESPONDEMOS EN 1 HORA",
-                "hero-title": "Protección práctica <br> <span class='text-[#aec844]'>que lo mantiene</span> <br> asegurado.",
-                "hero-sub": "(Y su familia merece dormir tranquila). 20 años protegiendo hogares en el sur de Florida. <span class='text-slate-900 font-bold underline decoration-[#aec844]'>Un buen techo es paz mental.</span>",
+                "hero-badge": "Horario oficina: Humanos. Fuera: IA.",
+                "hero-title": "Protección <br> Práctica <br> <span class='text-[#aec844]'>Que lo mantiene</span> <br> Asegurado.",
+                "hero-sub-1": "Evite sorpresas costosas. Obtenga un análisis satelital + dossier para seguros — GRATIS (valor $1,900).",
+                "hero-sub-2": "La mayoría de los propietarios no se demoran porque no les importe. <br class=\"hidden lg:block\">Se demoran porque no tienen información técnica clara.",
+                "hero-sub-3": "Los costos no suben por el techo en sí — <br class=\"hidden lg:block\">suben porque el tiempo elimina opciones.",
+                "hero-sub-4": "Tras 20 años y 6,000+ proyectos, hemos aprendido esto: <br>La preparación protege tanto su presupuesto como su ventaja.",
                 "stat-1": "Instalaciones", "stat-2": "Solo 3% en USA", "stat-3": "Reseñas Google",
-                "form-title": "Evaluación Inteligente", "form-sub": "¿Ocupado o fuera? <b>Nuestro agente de IA le atiende 24/7.</b>",
+                "form-title": "Evaluación Inteligente", 
+                "form-sub": "¿Ocupado o fuera? <br> <span class='text-slate-900 font-bold'>Nuestro agente de IA le atiende 24/7.</span>",
                 "form-footer": "Protegido por seguro de $2M.",
                 "cta-form-btn": "INICIAR EVALUACIÓN",
-                "problem-title": "¿Le suena <br> familiar?",
-                "p-1": "\"Ahora es muy caro, lo haré el próximo año\"",
-                "p-2": "\"Mi seguro dice que tengo 60 días o pierdo la cobertura\"",
-                "p-3": "\"La asociación (HOA) me envió una carta de infracción\"",
-                "uncomfortable-truth-title": "La incómoda verdad:",
-                "uncomfortable-truth-desc1": "Cada mes que esperas, el costo aumenta entre $500 y $1,200.",
-                "uncomfortable-truth-desc2": "Lo hemos visto 2,000 veces.",
-                "sol-1-t": "Financiación en 15 min", "sol-1-d": "Sabemos que $13,600 no están tirados en el sofá. Aprobamos rápido.",
-                "sol-2-t": "100% Antihuracanes", "sol-2-d": "Cero llamadas tras Irma o Ian. Nuestros techos no fallan.",
-                "testimonial": '"Después de 3 tormentas tropicales, ni una gota de agua."',
-                "offer-title": "Lo que recibe hoy:", "offer-badge": "Evaluación profesional reservada para propietarios calificados.",
-                "o-1": "Subimos al techo (nada de drones)", "o-2": "Explicación clara EN ESPAÑOL", "o-3": "Si 2 vecinos se unen, todos ahorran $250",
-                "price-ref": "Inversión Típica:", "price-desc": "Casa de 2,000 pies². Incluye materiales, permisos, limpieza y 1 año de mantenimiento.",
+                "testimonials-title": "Tranquilidad, Entregada.",
+                "testimonials-subtitle": "Construimos relaciones, no solo techos. Esto es lo que dicen nuestros clientes después de experimentar la diferencia de Alom Builders.",
+                "t1-text": "\"Alum builders hizo un trabajo realmente genial en nuestro nuevo techo de metal. Quedó exactamente como esperábamos y no ha habido fugas... La calidad del trabajo es excepcional, y no dudaré en usar esta compañía de nuevo.\"",
+                "t2-text": "\"Hicieron un trabajo increíble en mi casa. Remodelaron mi baño, instalaron ventanas de impacto y se encargaron de mi techo de metal de principio a fin. La calidad del trabajo, la atención al detalle y el profesionalismo fueron de primer nivel. La comunicación fue clara, se respetaron los plazos y los resultados superaron las expectativas. Recomiendo 100% a Alom Builders.\"",
+                "t3-text": "\"Mi primo, que hizo una renovación con Alom Builders, me los recomendó. Reemplacé el techo viejo de mi casa con ellos. Ahora los recomiendo a cualquiera que quiera una buena renovación. Gran trabajo. Excelente servicio al cliente...\"",
+                "process-title": "Nuestro Proceso Inteligente en 3 Pasos",
+                "step1-title": "Paso 1: Evaluación Remota con IA + Satélite", "step1-desc": "Sin visitas aún. Sin interrupciones.",
+                "step2-title": "Paso 2: Dossier Técnico Listo para Seguros", "step2-desc": "Documentación clara + recomendación de sistema personalizada.",
+                "step3-title": "Paso 3: Instalación Tradicional con Nuestro Equipo Certificado", "step3-desc": "Instaladores GAF Elite. Permisos, cumplimiento y ejecución manejados de principio a fin.",
+                "offer-title": "LO QUE INCLUYE (SI CALIFICA):",
+                "val-1-title": "Análisis Satelital Remoto (Valor $900)", "val-1-desc": "Revisión no invasiva usando datos aéreos de aseguradoras. Sin interrupciones.",
+                "val-2-title": "Dossier Técnico para Seguros (Valor $600)", "val-2-desc": "Estado documentado, riesgos y cumplimiento para evitar sorpresas con seguro/HOA.",
+                "val-3-title": "Recomendación de Sistema Experto (Valor $400)", "val-3-desc": "Opciones de materiales y garantías en lenguaje claro alineadas a su presupuesto.",
+                "val-4-title": "Ventaja de Buen Vecino", "val-4-desc": "Si 2 vecinos califican, cada uno obtiene un crédito de $250 para su proyecto.",
+                "val-total-label": "VALOR PROFESIONAL TOTAL: <span class='line-through decoration-red-500 decoration-2'>$1,900</span>", "val-price": "PROPIETARIOS CALIFICADOS: $0",
+                "services-title": "Servicios Principales de Techado en el Sur de Florida",
+                "services-subtitle": "Diseñados para huracanes y lluvias intensas en Miami-Dade, Broward y Palm Beach.",
+                "service1-title": "Techos de Shingle", "service2-title": "Techos de Metal", "service3-title": "Techos de Teja", "service4-title": "Techos Planos",
+                "service-cta": "Ver Detalles",
+                "why-title": "¿Por qué Alom Builders?",
+                "why-subtitle": "Combinamos 20 años de experiencia práctica con tecnología inteligente para ofrecerle un proceso de techado mejor, más rápido y más transparente.",
+                "why1": "<strong>Análisis de IA + satélite</strong> que ahorra tiempo y evita molestias",
+                "why2": "<strong>Costo $0 para propietarios calificados</strong> (valor profesional real de $1,900)",
+                "why3": "<strong>Preparación</strong> que protege tanto su presupuesto como sus opciones de seguro",
+                "why4": "<strong>Equipo humano certificado GAF Elite</strong> con 20 años de experiencia",
+                "why5": "<strong>Cobertura de seguro de $2M</strong> para total tranquilidad",
                 "footer-desc": "Empresa familiar. 20 años protegiendo Florida.",
                 "cta-final": "AGENDAR EVALUACIÓN AHORA"
             }
@@ -518,7 +511,9 @@ Irma, Michael, Ian... not one emergency call. Not one leak.</p>
         function changeLang(lang) {
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
-                el.innerHTML = translations[lang][key];
+                if(translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
             });
 
             // Estilo de botones
