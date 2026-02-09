@@ -43,6 +43,36 @@
                 mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
             }
         }
+
+        /* HOVER GALLERY STYLES */
+        .hover-gallery {
+            display: grid;
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+            position: relative;
+        }
+        .hover-gallery > * {
+            grid-area: 1 / 1;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.3s ease-in-out;
+        }
+        /* Desktop: Hover behavior */
+        @media (min-width: 1024px) {
+            .hover-gallery::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                z-index: 10;
+                display: flex;
+            }
+            /* Logic for multiple images would go here */
+        }
+        /* Mobile: Scroll behavior */
+        @media (max-width: 1023px) {
+            .hover-gallery img { opacity: 0; }
+            .hover-gallery img.active { opacity: 1; }
+        }
     </style>
 </head>
 <body class="bg-white text-slate-900 overflow-x-hidden">
@@ -109,10 +139,10 @@
                     
                     <!-- Subtitulo -->
                     <div class="text-lg lg:text-2xl text-slate-600 max-w-xl leading-relaxed font-medium">
-                        <p class="mb-4 oswald-font text-slate-500 text-xl lg:text-2xl font-bold uppercase" data-i18n="hero-sub-1">Evita sorpresas costosas: Obtén análisis satelital + dossier para seguros GRATIS (valor $1,900)</p>
+                        <p class="mb-4 oswald-font text-slate-500 text-xl lg:text-2xl font-bold uppercase" data-i18n="hero-sub-1">Avoid costly surprises. Get a satellite analysis + insurance-ready dossier — FREE ($1,900 value).</p>
                         
                         <div class="space-y-4 text-base lg:text-lg">
-                            <p data-i18n="hero-sub-2">La mayoría de los propietarios no se demoran porque no les importe. <br class="hidden lg:block">Se demoran porque no tienen información técnica clara.</p>
+                            <p data-i18n="hero-sub-2">Most homeowners don’t delay because they don’t care. <br class="hidden lg:block">They delay because they don’t have clear technical information.</p>
                             <p data-i18n="hero-sub-3">Costs don’t usually rise because of the roof itself — <br class="hidden lg:block">they rise because timing removes options.</p>
                             <p class="text-slate-900 font-bold border-l-4 border-[#aec844] pl-4" data-i18n="hero-sub-4">After 20 years and 6,000+ projects, we’ve learned this: <br>Preparation protects both your budget and your leverage.</p>
                         </div>
@@ -167,8 +197,8 @@
     <!-- TESTIMONIALS SECTION -->
     <section class="bg-slate-50/70 py-20 lg:py-24">
         <div class="max-w-6xl mx-auto px-6 text-center">
-            <h2 class="text-3xl lg:text-4xl font-black text-[#3053a4] uppercase oswald-font mb-4" data-i18n="testimonials-title">Tranquilidad, Entregada.</h2>
-            <p class="max-w-2xl mx-auto text-slate-600 mb-12" data-i18n="testimonials-subtitle">Construimos relaciones, no solo techos. Esto es lo que dicen nuestros clientes después de experimentar la diferencia de Alom Builders.</p>
+            <h2 class="text-3xl lg:text-4xl font-black text-[#3053a4] uppercase oswald-font mb-4" data-i18n="testimonials-title">Peace of Mind, Delivered.</h2>
+            <p class="max-w-2xl mx-auto text-slate-600 mb-12" data-i18n="testimonials-subtitle">We build relationships, not just roofs. Here's what our clients say after experiencing the Alom Builders difference.</p>
             
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
                 <!-- Testimonial 1 -->
@@ -180,10 +210,10 @@
                         <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
                         <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
                     </div>
-                    <p class="text-slate-700 mb-4 flex-grow text-sm" data-i18n="t1-text">"Alum builders hizo un trabajo realmente genial en nuestro nuevo techo de metal. Quedó exactamente como esperábamos y no ha habido fugas... La calidad del trabajo es excepcional, y no dudaré en usar esta compañía de nuevo."</p>
+                    <p class="text-slate-700 mb-4 flex-grow text-sm" data-i18n="t1-text">"Alum builders did a really great job on our new metal roof. It came out exactly as we expected and there has been no leaks... The quality of work is exceptional, and I will not hesitate to use this company again."</p>
                     <div class="flex items-center justify-between mt-auto pt-4 border-t border-slate-100">
                         <p class="font-bold text-sm text-slate-800">Patricia Killian</p>
-                        <a href="https://maps.app.goo.gl/935pmDwifzS4eWqu8" target="_blank" class="text-xs text-blue-500 hover:underline">Verificado</a>
+                        <a href="https://maps.app.goo.gl/935pmDwifzS4eWqu8" target="_blank" class="text-xs text-blue-500 hover:underline">Verify</a>
                     </div>
                 </div>
                 <!-- Testimonial 2 -->
@@ -195,10 +225,10 @@
                         <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
                         <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
                     </div>
-                    <p class="text-slate-700 mb-4 flex-grow text-sm" data-i18n="t2-text">"Hicieron un trabajo increíble en mi casa. Remodelaron completamente mi baño, instalaron todas mis ventanas de impacto y se encargaron de mi sistema de techo de metal de principio a fin. La calidad, atención al detalle y profesionalismo fueron de primer nivel."</p>
+                    <p class="text-slate-700 mb-4 flex-grow text-sm" data-i18n="t2-text">"Alom Builders did an amazing job on my home. They remodeled my bathroom, installed impact windows, and handled my metal roof system from start to finish. The quality of work, attention to detail, and professionalism were top tier. Communication was clear, timelines were respected, and results exceeded expectations. I 100% recommend Alom Builders to anyone looking for reliable, high-quality construction work."</p>
                     <div class="flex items-center justify-between mt-auto pt-4 border-t border-slate-100">
                         <p class="font-bold text-sm text-slate-800">Ronald M.</p>
-                        <a href="https://maps.app.goo.gl/BvXSEgVFrJDFPi2n9" target="_blank" class="text-xs text-blue-500 hover:underline">Verificado</a>
+                        <a href="https://maps.app.goo.gl/BvXSEgVFrJDFPi2n9" target="_blank" class="text-xs text-blue-500 hover:underline">Verify</a>
                     </div>
                 </div>
                 <!-- Testimonial 3 -->
@@ -210,10 +240,10 @@
                         <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
                         <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
                     </div>
-                    <p class="text-slate-700 mb-4 flex-grow text-sm" data-i18n="t3-text">"Mi primo, que hizo una renovación con Alom Builders, me los recomendó. Reemplacé el techo viejo de mi casa con ellos. Ahora los recomiendo a cualquiera que quiera una buena renovación. Gran trabajo. Excelente servicio al cliente..."</p>
+                    <p class="text-slate-700 mb-4 flex-grow text-sm" data-i18n="t3-text">"My cousin who did a Home Renovation with Alom Builders, recommended them to me. I replaced my home old roof with Alom Builders. Now I recommend Alom Builders to any one who wants a good Home Renovation. Great Job. Excellent Customer Service..."</p>
                     <div class="flex items-center justify-between mt-auto pt-4 border-t border-slate-100">
                         <p class="font-bold text-sm text-slate-800">Julio Villa</p>
-                        <a href="https://maps.app.goo.gl/5vmRAJRK3jjTy7LK6" target="_blank" class="text-xs text-blue-500 hover:underline">Verificado</a>
+                        <a href="https://maps.app.goo.gl/5vmRAJRK3jjTy7LK6" target="_blank" class="text-xs text-blue-500 hover:underline">Verify</a>
                     </div>
                 </div>
             </div>
@@ -223,7 +253,7 @@
     <!-- SMART PROCESS SECTION -->
     <section class="py-20 lg:py-24">
         <div class="max-w-5xl mx-auto px-6 text-center">
-            <h2 class="text-3xl lg:text-4xl font-black text-[#3053a4] uppercase oswald-font mb-12" data-i18n="process-title">Nuestro Proceso Inteligente en 3 Pasos</h2>
+            <h2 class="text-3xl lg:text-4xl font-black text-[#3053a4] uppercase oswald-font mb-12" data-i18n="process-title">Our Smart Process in 3 Steps</h2>
             <div class="relative grid md:grid-cols-3 gap-8 md:gap-4">
                 <!-- Dotted line for desktop -->
                 <div class="hidden md:block absolute top-10 left-0 w-full h-px">
@@ -296,7 +326,7 @@
                     <div class="flex gap-4">
                         <div class="shrink-0 mt-1 text-[#aec844]"><i data-lucide="users" class="w-6 h-6"></i></div>
                         <div>
-                            <h3 class="font-black text-[#3053a4] text-lg uppercase" data-i18n="val-4-title">Ventaja de Buen Vecino</h3>
+                            <h3 class="font-black text-[#3053a4] text-lg uppercase" data-i18n="val-4-title">Good Neighbor Advantage</h3>
                             <p class="text-slate-600 text-sm leading-relaxed" data-i18n="val-4-desc">If 2 neighbors qualify, each gets a $250 project credit.</p>
                         </div>
                     </div>
@@ -314,41 +344,53 @@
     <!-- MAIN SERVICES SECTION -->
     <section class="bg-slate-50/70 py-20 lg:py-24">
         <div class="max-w-6xl mx-auto px-6 text-center">
-            <h2 class="text-3xl lg:text-4xl font-black text-[#3053a4] uppercase oswald-font mb-4" data-i18n="services-title">Servicios Principales en South Florida</h2>
-            <p class="max-w-2xl mx-auto text-slate-600 mb-12" data-i18n="services-subtitle">Diseñados para huracanes y lluvias intensas en Miami-Dade, Broward y Palm Beach.</p>
+            <h2 class="text-3xl lg:text-4xl font-black text-[#3053a4] uppercase oswald-font mb-4" data-i18n="services-title">Core Roofing Services in South Florida</h2>
+            <p class="max-w-2xl mx-auto text-slate-600 mb-12" data-i18n="services-subtitle">Engineered for hurricanes and heavy rains in Miami-Dade, Broward, and Palm Beach.</p>
             
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- Service Card 1 -->
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 text-center hover:shadow-lg hover:-translate-y-1 transition-all">
-                    <div class="inline-block p-3 bg-[#3053a4]/10 rounded-lg text-[#3053a4] mb-4">
-                        <i data-lucide="layers-3" class="w-8 h-8"></i>
+                <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all flex flex-col">
+                    <div class="h-48 overflow-hidden hover-gallery js-scroll-gallery relative">
+                        <img src="https://old.alombuilders.us/wp-content/uploads/2023/10/single02.jpg" alt="Shingle Roofs" class="active w-full h-full object-cover absolute inset-0">
                     </div>
-                    <h3 class="font-black text-lg text-slate-800 uppercase oswald-font mb-2" data-i18n="service1-title">Techos de Shingle</h3>
-                    <button popovertarget="form-popover" class="text-sm font-bold text-[#3053a4] hover:underline" data-i18n="service-cta">Ver Detalles</button>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="font-black text-lg text-slate-800 uppercase oswald-font mb-2" data-i18n="service1-title">Shingle Roofs</h3>
+                        <p class="text-sm text-slate-600 mb-4 flex-grow line-clamp-4" data-i18n="service1-desc">Shingle roofs are a top choice for many South Florida homeowners due to their affordability, durability, and wide availability.</p>
+                        <button popovertarget="form-popover" class="text-sm font-bold text-[#3053a4] hover:underline mt-auto" data-i18n="service-cta">Start Assessment</button>
+                    </div>
                 </div>
                 <!-- Service Card 2 -->
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 text-center hover:shadow-lg hover:-translate-y-1 transition-all">
-                    <div class="inline-block p-3 bg-[#3053a4]/10 rounded-lg text-[#3053a4] mb-4">
-                        <i data-lucide="sheet" class="w-8 h-8"></i>
+                <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all flex flex-col">
+                    <div class="h-48 overflow-hidden hover-gallery js-scroll-gallery relative">
+                        <img src="https://old.alombuilders.us/wp-content/uploads/2023/10/metal04-768x513-1.jpg" alt="Metal Roofs" class="active w-full h-full object-cover absolute inset-0">
                     </div>
-                    <h3 class="font-black text-lg text-slate-800 uppercase oswald-font mb-2" data-i18n="service2-title">Techos de Metal</h3>
-                    <button popovertarget="form-popover" class="text-sm font-bold text-[#3053a4] hover:underline" data-i18n="service-cta">Ver Detalles</button>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="font-black text-lg text-slate-800 uppercase oswald-font mb-2" data-i18n="service2-title">Metal Roofs</h3>
+                        <p class="text-sm text-slate-600 mb-4 flex-grow line-clamp-4" data-i18n="service2-desc">Metal roofing systems can last up to four times longer than traditional materials. Many insurance companies offer significant discounts.</p>
+                        <button popovertarget="form-popover" class="text-sm font-bold text-[#3053a4] hover:underline mt-auto" data-i18n="service-cta">Start Assessment</button>
+                    </div>
                 </div>
                 <!-- Service Card 3 -->
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 text-center hover:shadow-lg hover:-translate-y-1 transition-all">
-                    <div class="inline-block p-3 bg-[#3053a4]/10 rounded-lg text-[#3053a4] mb-4">
-                        <i data-lucide="layout-grid" class="w-8 h-8"></i>
+                <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all flex flex-col">
+                    <div class="h-48 overflow-hidden hover-gallery js-scroll-gallery relative">
+                        <img src="https://old.alombuilders.us/wp-content/uploads/2023/10/TITLE04-768x513-1.jpg" alt="Tile Roofs" class="active w-full h-full object-cover absolute inset-0">
                     </div>
-                    <h3 class="font-black text-lg text-slate-800 uppercase oswald-font mb-2" data-i18n="service3-title">Techos de Teja</h3>
-                    <button popovertarget="form-popover" class="text-sm font-bold text-[#3053a4] hover:underline" data-i18n="service-cta">Ver Detalles</button>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="font-black text-lg text-slate-800 uppercase oswald-font mb-2" data-i18n="service3-title">Tile Roofs</h3>
+                        <p class="text-sm text-slate-600 mb-4 flex-grow line-clamp-4" data-i18n="service3-desc">Tile roofing, especially concrete and clay tiles, is one of the most popular and durable roofing solutions in South Florida.</p>
+                        <button popovertarget="form-popover" class="text-sm font-bold text-[#3053a4] hover:underline mt-auto" data-i18n="service-cta">Start Assessment</button>
+                    </div>
                 </div>
                 <!-- Service Card 4 -->
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 text-center hover:shadow-lg hover:-translate-y-1 transition-all">
-                    <div class="inline-block p-3 bg-[#3053a4]/10 rounded-lg text-[#3053a4] mb-4">
-                        <i data-lucide="square" class="w-8 h-8"></i>
+                <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all flex flex-col">
+                    <div class="h-48 overflow-hidden hover-gallery js-scroll-gallery relative">
+                        <img src="https://old.alombuilders.us/wp-content/uploads/2023/10/FLA02-768x513-1.jpg" alt="Flat Roofs" class="active w-full h-full object-cover absolute inset-0">
                     </div>
-                    <h3 class="font-black text-lg text-slate-800 uppercase oswald-font mb-2" data-i18n="service4-title">Techos Planos</h3>
-                    <button popovertarget="form-popover" class="text-sm font-bold text-[#3053a4] hover:underline" data-i18n="service-cta">Ver Detalles</button>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="font-black text-lg text-slate-800 uppercase oswald-font mb-2" data-i18n="service4-title">Flat Roofs</h3>
+                        <p class="text-sm text-slate-600 mb-4 flex-grow line-clamp-4" data-i18n="service4-desc">A flat roof can provide the watertight surface that keeps your building protected from moisture for years to come.</p>
+                        <button popovertarget="form-popover" class="text-sm font-bold text-[#3053a4] hover:underline mt-auto" data-i18n="service-cta">Start Assessment</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -359,15 +401,15 @@
         <div class="max-w-4xl mx-auto px-6">
             <div class="grid lg:grid-cols-2 gap-12 items-center">
                 <div class="text-center lg:text-left">
-                    <h2 class="text-3xl lg:text-4xl font-black text-[#3053a4] uppercase oswald-font mb-4" data-i18n="why-title">¿Por qué Alom Builders?</h2>
-                    <p class="text-slate-600 text-lg" data-i18n="why-subtitle">Combinamos 20 años de experiencia práctica con tecnología inteligente para ofrecerle un proceso de techado mejor, más rápido y más transparente.</p>
+                    <h2 class="text-3xl lg:text-4xl font-black text-[#3053a4] uppercase oswald-font mb-4" data-i18n="why-title">Why Alom Builders?</h2>
+                    <p class="text-slate-600 text-lg" data-i18n="why-subtitle">We blend 20 years of hands-on experience with smart technology to give you a better, faster, and more transparent roofing process.</p>
                 </div>
                 <div class="space-y-4">
-                    <div class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-[#aec844] shrink-0 mt-1"></i><p class="text-slate-700" data-i18n="why1"><strong>Análisis IA + Satélite:</strong> Ahorre tiempo y evite molestias con nuestra evaluación remota.</p></div>
-                    <div class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-[#aec844] shrink-0 mt-1"></i><p class="text-slate-700" data-i18n="why2"><strong>$0 para Propietarios Calificados:</strong> Obtenga una evaluación profesional valorada en $1,900 sin costo.</p></div>
-                    <div class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-[#aec844] shrink-0 mt-1"></i><p class="text-slate-700" data-i18n="why3"><strong>Proteja su Presupuesto y Opciones:</strong> Nuestro proceso de preparación protege su presupuesto y opciones de seguro.</p></div>
-                    <div class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-[#aec844] shrink-0 mt-1"></i><p class="text-slate-700" data-i18n="why4"><strong>Equipo Humano Certificado GAF:</strong> Benefíciese de 20 años de experiencia y certificación de élite.</p></div>
-                    <div class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-[#aec844] shrink-0 mt-1"></i><p class="text-slate-700" data-i18n="why5"><strong>Cobertura de Seguro de $2M:</strong> Su propiedad y su tranquilidad están totalmente protegidas.</p></div>
+                    <div class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-[#aec844] shrink-0 mt-1"></i><p class="text-slate-700" data-i18n="why1"><strong>AI + satellite analysis</strong> that saves time and avoids disruption</p></div>
+                    <div class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-[#aec844] shrink-0 mt-1"></i><p class="text-slate-700" data-i18n="why2"><strong>$0 cost for qualified homeowners</strong> (real $1,900 professional value)</p></div>
+                    <div class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-[#aec844] shrink-0 mt-1"></i><p class="text-slate-700" data-i18n="why3"><strong>Preparation</strong> that protects both budget and insurance options</p></div>
+                    <div class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-[#aec844] shrink-0 mt-1"></i><p class="text-slate-700" data-i18n="why4"><strong>Human team certified GAF Elite</strong> with 20 years of experience</p></div>
+                    <div class="flex items-start gap-3"><i data-lucide="check-circle-2" class="w-5 h-5 text-[#aec844] shrink-0 mt-1"></i><p class="text-slate-700" data-i18n="why5"><strong>$2M insurance coverage</strong> for total peace of mind</p></div>
                 </div>
             </div>
         </div>
@@ -454,7 +496,11 @@
                 "services-title": "Core Roofing Services in South Florida",
                 "services-subtitle": "Engineered for hurricanes and heavy rains in Miami-Dade, Broward, and Palm Beach.",
                 "service1-title": "Shingle Roofs", "service2-title": "Metal Roofs", "service3-title": "Tile Roofs", "service4-title": "Flat Roofs",
-                "service-cta": "Get Details",
+                "service1-desc": "Shingle roofs are a top choice for many South Florida homeowners due to their affordability, durability, and wide availability.",
+                "service2-desc": "Metal roofing systems can last up to four times longer than traditional materials. Many insurance companies offer significant discounts.",
+                "service3-desc": "Tile roofing, especially concrete and clay tiles, is one of the most popular and durable roofing solutions in South Florida.",
+                "service4-desc": "A flat roof can provide the watertight surface that keeps your building protected from moisture for years to come.",
+                "service-cta": "Start Assessment",
                 "why-title": "Why Alom Builders?",
                 "why-subtitle": "We blend 20 years of hands-on experience with smart technology to give you a better, faster, and more transparent roofing process.",
                 "why1": "<strong>AI + satellite analysis</strong> that saves time and avoids disruption",
@@ -495,7 +541,11 @@
                 "services-title": "Servicios Principales de Techado en el Sur de Florida",
                 "services-subtitle": "Diseñados para huracanes y lluvias intensas en Miami-Dade, Broward y Palm Beach.",
                 "service1-title": "Techos de Shingle", "service2-title": "Techos de Metal", "service3-title": "Techos de Teja", "service4-title": "Techos Planos",
-                "service-cta": "Ver Detalles",
+                "service1-desc": "Los techos de shingle son una opción popular por su asequibilidad, durabilidad y amplia disponibilidad en el sur de Florida.",
+                "service2-desc": "Los sistemas de techo de metal pueden durar hasta cuatro veces más que los materiales tradicionales y ofrecen descuentos en seguros.",
+                "service3-desc": "Los techos de teja, especialmente de concreto y arcilla, son una de las soluciones más populares y duraderas en el sur de Florida.",
+                "service4-desc": "Un techo plano puede proporcionar la superficie impermeable que mantiene su edificio protegido de la humedad durante años.",
+                "service-cta": "Iniciar Evaluación",
                 "why-title": "¿Por qué Alom Builders?",
                 "why-subtitle": "Combinamos 20 años de experiencia práctica con tecnología inteligente para ofrecerle un proceso de techado mejor, más rápido y más transparente.",
                 "why1": "<strong>Análisis de IA + satélite</strong> que ahorra tiempo y evita molestias",
@@ -529,6 +579,35 @@
                 document.getElementById('btn-es').classList.add('text-slate-400');
             }
         }
+
+        // SCROLL GALLERY LOGIC (Mobile)
+        const isMobile = () => window.innerWidth < 1024;
+        const galleries = document.querySelectorAll('.js-scroll-gallery');
+
+        const handleScroll = () => {
+            if (!isMobile()) return;
+
+            galleries.forEach(gallery => {
+                const rect = gallery.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                
+                const progress = 1 - (rect.bottom / (windowHeight + rect.height));
+                
+                if (progress >= 0 && progress <= 1) {
+                    const images = gallery.querySelectorAll('img');
+                    const totalImages = images.length;
+                    const index = Math.floor(progress * totalImages);
+                    const safeIndex = Math.max(0, Math.min(index, totalImages - 1));
+
+                    images.forEach((img, i) => {
+                        img.classList.toggle('active', i === safeIndex);
+                    });
+                }
+            });
+        };
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        window.addEventListener('resize', handleScroll);
+        handleScroll(); // Init
 
         lucide.createIcons();
     </script>
